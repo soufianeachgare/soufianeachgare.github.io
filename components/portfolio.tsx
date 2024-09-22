@@ -1,11 +1,19 @@
 "use client"
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, ChevronDown, Briefcase, GraduationCap } from "lucide-react"
+import { useEffect, useState } from "react"
+import { motion, useScroll, useSpring } from "framer-motion"
+import { Github, Linkedin, Mail, ChevronDown, Briefcase, GraduationCap, User, Code, FolderOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+
+const navItems = [
+  { icon: User, label: "About", sectionId: "about" },
+  { icon: Code, label: "Skills", sectionId: "skills" },
+  { icon: Briefcase, label: "Experience", sectionId: "experience" },
+  { icon: GraduationCap, label: "Education", sectionId: "education" },
+  { icon: FolderOpen, label: "Projects", sectionId: "projects" },
+]
 
 const skills = [
   { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg", domain: "Backend" },
@@ -99,25 +107,71 @@ const certifications = [
   { name: "Programmation avec JavaScript", year: "2023" }
 ]
 const langues = [
-  { name: "Problem Solving (Basic) Certificate", year: "2024" },
-  { name: "Python (Basic) Certificate", year: "2024" },
-  { name: "Mastering Laravel Framework and PHP", year: "2023" },
-  { name: "Création de sites web avec HTML5 et CSS3", year: "2023" },
-  { name: "Programmation avec JavaScript", year: "2023" }
+  { name: "Arabe", year: "Maternelle" },
+  { name: "Francais", year: "Courant" },
+  { name: "Anglais", year: "Intermédiaire" },
 ]
 const domains = Array.from(new Set(skills.map(skill => skill.domain)))
 
 export function Portfolio() {
   const [expandedProject, setExpandedProject] = useState<number | null>(null)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
-
+  const [activeSection, setActiveSection] = useState("")
   const filteredSkills = selectedDomain
     ? skills.filter(skill => skill.domain === selectedDomain)
     : skills
 
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    navItems.forEach((item) => {
+      const element = document.getElementById(item.sectionId)
+      if (element) observer.observe(element)
+    })
+
+    return () => observer.disconnect()
+  }, [])
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 text-gray-800">
-      <header className="container mx-auto px-4 py-16 text-center">
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 text-gray-800 relative">
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-blue-600 z-50"
+        style={{ scaleX }}
+      />
+
+      <nav className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40">
+        <ul className="space-y-4">
+          {navItems.map((item) => (
+            <li key={item.sectionId}>
+              <a
+                href={`#${item.sectionId}`}
+                className={`block p-2 rounded-full transition-colors duration-200 ${activeSection === item.sectionId ? "bg-blue-600 text-white" : "bg-white text-gray-600 hover:bg-gray-200"
+                  }`}
+              >
+                <item.icon className="w-6 h-6" />
+                <span className="sr-only">{item.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <header id="about" className="h-screen container mx-auto px-4 py-16 text-center">
         <motion.h1
           className="text-4xl font-bold mb-4"
           initial={{ opacity: 0, y: -20 }}
@@ -152,7 +206,7 @@ export function Portfolio() {
         </motion.div>
       </header>
 
-      <section className="container mx-auto px-4 py-16">
+      <section id="skills" className="h-screen container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
         <div className="flex flex-wrap justify-center gap-2 mb-8">
           {domains.map(domain => (
@@ -187,7 +241,7 @@ export function Portfolio() {
         </motion.div>
       </section>
 
-      <section className="container mx-auto px-4 py-16">
+      <section id="experience" className="h-screen container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold mb-8 text-center">Professional Experience</h2>
         <div className="space-y-6">
           {experiences.map((exp, index) => (
@@ -214,34 +268,34 @@ export function Portfolio() {
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-16">
+      <section id="education" className="h-screen container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold mb-8 text-center">Education & Certifications</h2>
-        <div>
-          <h3 className="text-2xl font-semibold mb-4">Education</h3>
-          {education.map((edu, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card className="mb-4">
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <GraduationCap className="mr-2" />
-                    {edu.degree}
-                  </CardTitle>
-                  <CardDescription>{edu.institution} | {edu.year}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>{edu.description}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-        <div className="grid md:grid-cols-2 gap-6">
-        <div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="col-span-2 grid md:grid-cols-2 gap-4 col-span-2">
+            {education.map((edu, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="mb-4">
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <GraduationCap className="mr-2" />
+                      {edu.degree}
+                    </CardTitle>
+                    <CardDescription>{edu.institution} | {edu.year}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{edu.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+          <div>
             <h3 className="text-2xl font-semibold mb-4">Certifications</h3>
             <ul className="space-y-2">
               {certifications.map((cert, index) => (
@@ -257,28 +311,28 @@ export function Portfolio() {
                 </motion.li>
               ))}
             </ul>
-          </div>
-          <div>
+            <br />
             <h3 className="text-2xl font-semibold mb-4">Langues</h3>
             <ul className="space-y-2">
               {langues.map((cert, index) => (
                 <motion.li
                   key={index}
-                  className="flex items-center"
+                  className="flex items-center justify-space-between"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Badge className="mr-2">{cert.year}</Badge>
                   {cert.name}
+                  <Badge className="mr-2">{cert.year}</Badge>
                 </motion.li>
               ))}
             </ul>
           </div>
+
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-16">
+      <section id="projects" className="h-screen container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold mb-8 text-center">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
