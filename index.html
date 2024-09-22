@@ -4,112 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV - Soufiane Achgare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            font-family: 'Inter', sans-serif;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn ease 2s forwards;
         }
-        .content {
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 900px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2 {
-            color: #333;
-        }
-        section {
-            margin-bottom: 30px;
-        }
-        .contact-info {
-            list-style: none;
-            padding: 0;
-        }
-        .contact-info li {
-            margin-bottom: 5px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
+        @keyframes fadeIn {
+            100% { opacity: 1; }
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>Soufiane Achgare</h1>
-        <p>Ingénieur d'État en Intelligence Artificielle et Big Data</p>
+<body class="bg-gray-100">
+
+    <header class="bg-gray-900 text-white py-6 fade-in">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl font-bold">Soufiane Achgare</h1>
+            <p class="mt-2">Ingénieur d'État en Intelligence Artificielle et Big Data</p>
+        </div>
     </header>
-    
-    <div class="content">
-        <section>
-            <h2>Contact</h2>
-            <ul class="contact-info">
-                <li><strong>Email:</strong> soufianeachgare@gmail.com</li>
+
+    <main class="max-w-4xl mx-auto my-10 p-5 bg-white rounded-lg shadow-md fade-in">
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Contact</h2>
+            <ul class="text-gray-600">
+                <li><strong>Email:</strong> <a href="mailto:soufianeachgare@gmail.com" class="text-blue-600">soufianeachgare@gmail.com</a></li>
                 <li><strong>Téléphone:</strong> +212 622908964</li>
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/soufianeachgare">linkedin.com/in/soufianeachgare</a></li>
-                <li><strong>GitHub:</strong> <a href="https://github.com/soufianeachgare">github.com/soufianeachgare</a></li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>Expérience professionnelle</h2>
-            <h3>Développeur Front-End - Le Premier Systeme</h3>
-            <p>Juillet 2024 - Présent | Agadir, Maroc</p>
-            <ul>
-                <li>Conception et développement d'une application de gestion des événements utilisant React et Google Material Design.</li>
-                <li>Collaboration avec l'équipe pour assurer la qualité du produit final.</li>
-            </ul>
-            
-            <h3>Full-Stack Developer - IronDev</h3>
-            <p>Avril 2023 - Juin 2023 | Agadir, Maroc</p>
-            <ul>
-                <li>Développement d'une application de gestion commerciale avec MERN Stack.</li>
-                <li>Analyse et conception UML.</li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>Formation</h2>
-            <p><strong>Diplôme d'ingénieur</strong> - Groupe ISGA | 2023 - 2025</p>
-            <p><strong>Licence Professionnelle</strong> - Ecole Supérieure Vinci | 2022 - 2023</p>
-            <p><strong>Diplôme de Technicien Supérieur</strong> - Groupe EFET | 2020 - 2022</p>
-        </section>
-
-        <section>
-            <h2>Compétences</h2>
-            <ul>
-                <li>Laravel, PHP, JavaScript, React, Tailwind CSS</li>
-                <li>Python, MongoDB, MySQL</li>
-                <li>Analyse de données et Intelligence Artificielle</li>
-                <li>Développement Agile et Méthodes Scrum</li>
+                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/soufianeachgare" class="text-blue-600">linkedin.com/in/soufianeachgare</a></li>
             </ul>
         </section>
 
-        <section>
-            <h2>Certificats</h2>
-            <ul>
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Résumé</h2>
+            <p class="text-gray-600">
+                Actuellement en dernière année de cycle ingénieur en Intelligence Artificielle et Big Data, je suis passionné par l'optimisation des processus et l’analyse des données. Je suis à la recherche d’un stage de fin d’études (PFE) pour mettre en pratique mes connaissances et apporter une valeur ajoutée à votre organisation.
+            </p>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Expérience professionnelle</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700">Analyste Conception - Le Premier Systeme</h3>
+                    <p class="text-gray-500">Juillet 2024 - Août 2024 | Agadir, Souss-Massa, Maroc</p>
+                    <ul class="list-disc pl-6 text-gray-600">
+                        <li>Analyse et conception d'une solution pour la gestion d’événements.</li>
+                        <li>Collaboration avec l’équipe pour garantir la conformité aux exigences techniques.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-700">Full-Stack Developer - IronDev</h3>
+                    <p class="text-gray-500">Avril 2023 - Juin 2023 | Agadir, Souss-Massa, Maroc</p>
+                    <ul class="list-disc pl-6 text-gray-600">
+                        <li>Développement d'une application de gestion commerciale avec MERN Stack.</li>
+                        <li>Analyse UML et implémentation des fonctionnalités back-end.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Formation</h2>
+            <ul class="text-gray-600 space-y-2">
+                <li><strong>Diplôme d'ingénieur</strong> - Groupe ISGA (2023 - 2025)</li>
+                <li><strong>Licence professionnelle</strong> - Ecole Supérieure Vinci (2022 - 2023)</li>
+                <li><strong>Diplôme de technicien supérieur</strong> - Groupe EFET (2020 - 2022)</li>
+                <li><strong>Université Ibn Zohr</strong> - Chimie physique (2020 - 2022)</li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Compétences</h2>
+            <ul class="grid grid-cols-2 gap-4 text-gray-600">
+                <li>Spring Boot</li>
+                <li>Spring MVC</li>
+                <li>Laravel</li>
+                <li>React</li>
+                <li>Tailwind CSS</li>
+                <li>PHP</li>
+                <li>Python</li>
+                <li>MongoDB</li>
+            </ul>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Certificats</h2>
+            <ul class="text-gray-600">
                 <li>Problem Solving (Basic) Certificate</li>
                 <li>Python (Basic) Certificate</li>
                 <li>Mastering Laravel Framework and PHP</li>
-                <li>Créez votre site web avec HTML5 et CSS3</li>
-                <li>Apprenez à programmer avec JavaScript</li>
             </ul>
         </section>
-    </div>
+    </main>
 
-    <footer>
-        <p>© 2024 Soufiane Achgare</p>
+    <footer class="bg-gray-900 text-white py-6 fade-in">
+        <div class="max-w-4xl mx-auto text-center">
+            <p>© 2024 Soufiane Achgare</p>
+        </div>
     </footer>
+
 </body>
 </html>
