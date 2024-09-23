@@ -54,26 +54,31 @@ const projects = [
                     complète pour améliorer les opérations de location de voitures.` },
   { name: "Linkme", description: "Outil permettant de créer un lien unique et unifié pour partager du contenu sur différentes plateformes." },
   { name: "E-buvette", description: "Dans le cadre de mon projet de fin d'année à l'ISGA, j'ai participé au développement d'une application de commande en ligne pour une buvette universitaire. Ce projet m'a permis de travailler en équipe, de mettre en pratique mes connaissances en développement web et d'appréhender les enjeux d'un projet réel. J'ai notamment appris à utiliser Spring Boot et à concevoir une architecture MVC." },
+  { name: "Gestion de Stock", description: "Dans le cadre de mon projet de fin d'année à Vinci, j'ai participé au développement d'une application de gestion de stock. Ce projet m'a permis de travailler en équipe, de mettre en pratique mes connaissances en développement web et d'appréhender les enjeux d'un projet réel. J'ai notamment appris à utiliser Next.js et MongoDB." },
 ]
 
 const experiences = [
   {
-    title: "Senior Full Stack Developer",
-    company: "Tech Innovators Inc.",
-    period: "2020 - Present",
-    description: "Lead development of multiple web applications using React, Node.js, and GraphQL. Implemented CI/CD pipelines and mentored junior developers."
+    title: "Analyste Conception et Développement",
+    company: "Le Premier Systeme",
+    period: "juil. 2024 - août 2024 · 2 mois",
+    description: `En tant que stagiaire développeur front-end chez Le Premier Système, j'ai eu la chance de participer à un projet innovant. Mes missions principales consistaient à :
+                    -Analyser les besoins fonctionnels et les spécifications techniques
+                    -Concevoir des interfaces utilisateur intuitives et esthétiques à l'aide de Figma
+                    -Développer les composants front-end avec React et Material UI
+                    -Collaborer étroitement avec l'équipe back-end pour assurer une intégration fluide
+                  Ce stage m'a permis de consolider mes compétences en développement web et de découvrir les enjeux d'un projet en entreprise. J'ai particulièrement apprécié la possibilité de travailler sur des technologies de pointe et de contribuer à un produit final.`
   },
   {
-    title: "Full Stack Developer",
-    company: "Digital Solutions Ltd.",
-    period: "2017 - 2020",
-    description: "Developed and maintained various client projects using MERN stack. Collaborated with design team to implement responsive UI/UX designs."
-  },
-  {
-    title: "Junior Web Developer",
-    company: "WebCraft Agency",
-    period: "2015 - 2017",
-    description: "Assisted in the development of WordPress themes and plugins. Gained experience in front-end technologies and PHP."
+    title: "Full-stack Developer",
+    company: "IronDev",
+    period: "avr. 2023 - juin 2023 · 3 mois",
+    description: `Dans le cadre de mon projet de fin d'études à Vinci, j'ai développé une application de gestion de stock full-stack. J'ai choisi Next.js pour sa performance et MongoDB pour sa flexibilité. Mes missions comprenaient :
+                    -La conception de l'architecture technique
+                    -Le développement du frontend avec Next.js
+                    -La création de la base de données MongoDB
+                    -La mise en place d'une API REST pour les échanges de données
+                    Ce projet m'a permis de mettre en pratique mes connaissances théoriques et d'acquérir une expérience significative en développement web. J'ai notamment appris à optimiser les performances d'une application web et à gérer un projet de manière autonome.`
   }
 ]
 
