@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
-import { Github, Linkedin, Mail, ChevronDown, Briefcase, GraduationCap, User, Code, FolderOpen, Link, Phone } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Github, Linkedin, Mail, ChevronDown, Briefcase, GraduationCap, User, Code, FolderOpen, Phone } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar"
