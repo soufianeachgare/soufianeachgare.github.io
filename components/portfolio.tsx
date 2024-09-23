@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
-import { Github, Linkedin, Mail, ChevronDown, Briefcase, GraduationCap, User, Code, FolderOpen } from "lucide-react"
+import { Github, Linkedin, Mail, ChevronDown, Briefcase, GraduationCap, User, Code, FolderOpen, Link, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar"
 const navItems = [
   { icon: User, label: "About", sectionId: "about" },
   { icon: Code, label: "Skills", sectionId: "skills" },
@@ -14,7 +14,18 @@ const navItems = [
   { icon: GraduationCap, label: "Education", sectionId: "education" },
   { icon: FolderOpen, label: "Projects", sectionId: "projects" },
 ]
-
+const user_data = {
+  Image_path: "https://media.licdn.com/dms/image/v2/D4E03AQGUB3MSHXnOCw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727053202800?e=1732752000&v=beta&t=Ejy2uUGZMhu8ktCA_R4rizdT8j1dlSUupl_xAAidX2w",
+  name: "Soufiane Achgare",
+  title: "Développeur Full-Stack",
+  description: "Ingénieur en informatique polyvalent avec une forte expertise en développement web et mobile, ainsi qu'en intelligence artificielle et big data. Passionné par l'innovation technologique, je suis à la recherche de nouveaux défis pour mettre en œuvre mes compétences et contribuer à des projets ambitieux. Ma maîtrise des langages de programmation, des frameworks et des outils d'analyse de données me permet de concevoir et de développer des solutions robustes et efficaces.",
+  socials: [
+    { name: "Github", icon: Github, url: "https://github.com/soufianeachgare", color: "#333" },
+    { name: "Linkedin", icon: Linkedin, url: "https://www.linkedin.com/in/soufianeachgare", color: "#0077B5" },
+    { name: "Mail", icon: Mail, url: "mail:soufianeachgare@gmail.com", color: "#D14836" },
+    { name: "Whatsapp", icon: Phone, url: "tel:+212622908964", color: "#D14836" },
+  ],
+}
 const skills = [
   { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg", domain: "Backend" },
   { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", domain: "Language" },
@@ -172,13 +183,24 @@ export function Portfolio() {
       </nav>
 
       <header id="about" className="h-screen container mx-auto px-4 py-16 text-center">
+        <motion.div
+          className="mb-8 flex justify-center"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Avatar className="w-32 h-32 border-4 border-white shadow-lg">
+            <AvatarImage src={user_data.Image_path} alt={user_data.name} />
+            <AvatarFallback>SA</AvatarFallback>
+          </Avatar>
+        </motion.div>
         <motion.h1
           className="text-4xl font-bold mb-4"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Jane Doe
+          {user_data.name}
         </motion.h1>
         <motion.p
           className="text-xl mb-8"
@@ -186,7 +208,15 @@ export function Portfolio() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Full Stack Developer | UI/UX Enthusiast
+          {user_data.title}
+        </motion.p>
+        <motion.p
+          className="text-lg mb-8"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          {user_data.description}
         </motion.p>
         <motion.div
           className="flex justify-center space-x-4"
@@ -194,15 +224,11 @@ export function Portfolio() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Button variant="ghost" size="icon">
-            <Github className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <Linkedin className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <Mail className="h-5 w-5" />
-          </Button>
+          {user_data.socials.map((exp, index) => (
+            <a key={index} href={exp.url}>
+              <exp.icon className="h-5 w-5" />
+            </a>
+          ))}
         </motion.div>
       </header>
 
@@ -317,7 +343,7 @@ export function Portfolio() {
               {langues.map((cert, index) => (
                 <motion.li
                   key={index}
-                  className="flex items-center justify-space-between"
+                  className="flex items-center justify-between"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
