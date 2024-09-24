@@ -14,7 +14,7 @@ const navItems = [
   { icon: FolderOpen, label: "Projects", sectionId: "projects" },
 ]
 const user_data = {
-  Image_path: "https://media.licdn.com/dms/image/v2/D4E03AQGUB3MSHXnOCw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1727053202800?e=1732752000&v=beta&t=Ejy2uUGZMhu8ktCA_R4rizdT8j1dlSUupl_xAAidX2w",
+  Image_path: "",
   name: "Soufiane Achgare",
   title: "Développeur Full-Stack",
   description: "Ingénieur en informatique polyvalent avec une forte expertise en développement web et mobile, ainsi qu'en intelligence artificielle et big data. Passionné par l'innovation technologique, je suis à la recherche de nouveaux défis pour mettre en œuvre mes compétences et contribuer à des projets ambitieux. Ma maîtrise des langages de programmation, des frameworks et des outils d'analyse de données me permet de concevoir et de développer des solutions robustes et efficaces.",
@@ -169,7 +169,7 @@ export function Portfolio() {
         style={{ scaleX }}
       />
 
-      <nav className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40">
+      <nav className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 hidden md:flex">
         <ul className="space-y-4">
           {navItems.map((item) => (
             <li key={item.sectionId}>
@@ -185,58 +185,88 @@ export function Portfolio() {
           ))}
         </ul>
       </nav>
-
-      <header id="about" className="h-screen container mx-auto px-4 py-16 text-center">
-        <motion.div
-          className="mb-8 flex justify-center"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Avatar className="w-32 h-32 border-4 border-white shadow-lg">
-            <AvatarImage src={user_data.Image_path} alt={user_data.name} />
-            <AvatarFallback>SA</AvatarFallback>
-          </Avatar>
-        </motion.div>
-        <motion.h1
-          className="text-4xl font-bold mb-4"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {user_data.name}
-        </motion.h1>
-        <motion.p
-          className="text-xl mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          {user_data.title}
-        </motion.p>
-        <motion.p
-          className="text-lg mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          {user_data.description}
-        </motion.p>
-        <motion.div
-          className="flex justify-center space-x-4"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          {user_data.socials.map((exp, index) => (
-            <a key={index} href={exp.url}>
-              <exp.icon className="h-5 w-5" />
-            </a>
+      <nav className="fixed bottom-1 transform translate-x-1 z-40 mx-auto md:hidden" style={{ right: 'calc((100% - 264px) / 2)' }}>
+        <div className="absolute -top-[10%] w-[150%] -left-[25%] bg-white blur-[40px] h-full -bottom-[20px]" style={{zIndex: '-1'}}></div>
+        <div className="absolute top-0 w-[100%] left-0 h-full bg-white " style={{zIndex: '-1'}}></div>
+        <ul className="flex flex-row gap-4 justify-center items-center align-items-center">
+          {navItems.map((item) => (
+            <li key={item.sectionId}>
+              <a
+                href={`#${item.sectionId}`}
+                className={`flex p-2 rounded-lg transition-colors duration-200 ${activeSection === item.sectionId ? "bg-blue-600 text-white" : "bg-white text-gray-600 hover:bg-gray-200"
+                  }`}
+              >
+                <item.icon className="w-6 h-6" />
+                <span className="sr-only">{item.label}</span>
+              </a>
+            </li>
           ))}
-        </motion.div>
+        </ul>
+      </nav>
+      <header id="about" className="md:h-screen container mx-auto px-4 py-8 md:py-16 text-center items-center justify-center flex flex-col gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center justify-center">
+          <motion.div
+            className="mb-8 flex justify-center relative"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Avatar className="h-64 w-64 md:h-96 md:w-80 border-4 border-white shadow-lg">
+              <AvatarImage src={user_data.Image_path} alt={user_data.name} />
+              <AvatarFallback>SA</AvatarFallback>
+            </Avatar>
+            {user_data.socials.map((exp, index) => (
+                <a key={index} href={exp.url} className={`md:hidden absolute w-10 h-10 ${(index) ==0 ||(index) ==3 ?'left-0 rounded-full bg-gray-500 ':'right-0 rounded-lg bg-blue-600'} ${(index+1)%2 ==0? ' bottom-2':'top-2'}  transition-colors duration-200 flex justify-center items-center text-white`}>
+                  <exp.icon className="h-5 w-5" />
+                </a>
+                
+              ))}
+            <motion.div
+              className="absolute -bottom-4 justify-center gap-4 md:flex hidden"
+              style={{ right: 'calc((100% - 208px)/2)' }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              {user_data.socials.map((exp, index) => (
+                <a key={index} href={exp.url} className={`w-10 h-10 ${(index+1)%2 ==0? 'rounded-lg bg-blue-600':'rounded-full bg-gray-500'}  transition-colors duration-200 flex justify-center items-center text-white`}>
+                  <exp.icon className="h-5 w-5" />
+                </a>
+                
+              ))}
+            </motion.div>
+          </motion.div>
+          <div className="flex flex-col col-span-2 gap-4 text-start">
+            <motion.h1
+              className="text-4xl font-bold"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {user_data.name}
+            </motion.h1>
+            <motion.p
+              className="text-xl"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              {user_data.title}
+            </motion.p>
+            <motion.p
+              className="text-lg px-2"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              {user_data.description}
+            </motion.p>
+          </div>
+        </div>
+
       </header>
 
-      <section id="skills" className="h-screen container mx-auto px-4 py-16">
+      <section id="skills" className="md:h-screen container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
         <div className="flex flex-wrap justify-center gap-2 mb-8">
           {domains.map(domain => (
@@ -271,7 +301,7 @@ export function Portfolio() {
         </motion.div>
       </section>
 
-      <section id="experience" className="h-screen container mx-auto px-4 py-16">
+      <section id="experience" className="md:h-screen container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold mb-8 text-center">Professional Experience</h2>
         <div className="space-y-6">
           {experiences.map((exp, index) => (
@@ -298,11 +328,11 @@ export function Portfolio() {
         </div>
       </section>
 
-      <section id="education" className="h-screen container mx-auto px-4 py-16">
+      <section id="education" className="md:h-screen container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold mb-8 text-center">Education & Certifications</h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="col-span-2 grid md:grid-cols-2 gap-4 col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 col-span-2">
             {education.map((edu, index) => (
               <motion.div
                 key={index}
@@ -327,7 +357,7 @@ export function Portfolio() {
           </div>
           <div>
             <h3 className="text-2xl font-semibold mb-4">Certifications</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 w-full">
               {certifications.map((cert, index) => (
                 <motion.li
                   key={index}
@@ -343,7 +373,7 @@ export function Portfolio() {
             </ul>
             <br />
             <h3 className="text-2xl font-semibold mb-4">Langues</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 w-full">
               {langues.map((cert, index) => (
                 <motion.li
                   key={index}
@@ -362,7 +392,7 @@ export function Portfolio() {
         </div>
       </section>
 
-      <section id="projects" className="h-screen container mx-auto px-4 py-16">
+      <section id="projects" className="md:h-screen container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold mb-8 text-center">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
